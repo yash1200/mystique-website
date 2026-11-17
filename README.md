@@ -1,56 +1,73 @@
-# sv
+<p align="center">
+  <img src="static/brand/mystique-mark.svg" width="64" height="64" alt="Mystique logo" />
+</p>
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+<h1 align="center">Mystique website</h1>
 
-## Creating a project
+<p align="center">
+  The landing page for <a href="https://github.com/yash1200/mystique">Mystique</a>, a calm, fast desktop client for PostgreSQL, MySQL, SQLite and MongoDB.
+</p>
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
 
-```sh
-# create a new project
-npx sv create my-app
+- SvelteKit with Svelte 5 (runes)
+- Tailwind CSS v4
+- `@sveltejs/adapter-static`: every page is prerendered to plain HTML at build time
+
+## Develop
+
+You need Node 22+ and pnpm.
+
+```bash
+pnpm install
+pnpm dev          # http://localhost:5173
 ```
 
-To recreate this project with the same configuration:
+Other scripts:
 
-```sh
-# recreate this project
-pnpm dlx sv@1.4.0 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:none" --install pnpm mystique-website
+```bash
+pnpm check        # svelte-check + TypeScript
+pnpm lint         # prettier + eslint
+pnpm format       # prettier --write
 ```
 
-## Adding features
+## Build
 
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
+```bash
+pnpm build        # writes the static site to build/
+pnpm preview      # serve the build locally
 ```
 
-For example, to add Tailwind CSS:
+`build/` is a static site that any static host can serve, such as GitHub Pages, Netlify, Cloudflare Pages or S3.
 
-```sh
-npx sv add tailwindcss
+- `index.html` is the prerendered landing page, with all content in the HTML.
+- `404.html` is the SPA fallback for unknown paths.
+
+If the site is served from a subpath (for example a GitHub Pages project page at `/mystique-website/`), set `paths.base` in `vite.config.ts`.
+
+## Project layout
+
+| Path                      | What it holds                                                     |
+| ------------------------- | ----------------------------------------------------------------- |
+| `src/routes/+page.svelte` | The whole landing page: nav, hero, features, databases, downloads |
+| `src/routes/layout.css`   | Design tokens (colours, fonts, easing) and the shared card styles |
+| `src/routes/+layout.ts`   | `prerender = true`                                                |
+| `src/lib/reveal.ts`       | Scroll fade-in action (IntersectionObserver)                      |
+| `src/app.html`            | Fonts, title, description and Open Graph tags                     |
+| `static/`                 | App screenshot and brand marks                                    |
+
+## Releasing a new app version
+
+Download links point to versioned files on the app's GitHub release, so bump `VERSION` at the top of `src/routes/+page.svelte` after each Mystique release. The file names must match the release assets:
+
+```bash
+gh release view -R yash1200/mystique --json assets -q '.assets[].name'
 ```
 
-## Developing
+## Brand
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+The logo, colours and tone follow the app's brand guide in [`mystique/static/brand`](https://github.com/yash1200/mystique/tree/main/static/brand). Don't redraw the dog mark. Production is always amber. No purple and no Inter.
 
-```sh
-npm run dev
+## License
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+MIT, same as [Mystique](https://github.com/yash1200/mystique/blob/main/LICENSE).
