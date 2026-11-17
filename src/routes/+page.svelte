@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { asset } from '$app/paths';
 	import { reveal } from '#lib/reveal.js';
 
 	// shortcut: release filenames carry the version, bump on each release; switch to reading latest.json if releases get frequent.
@@ -312,7 +313,7 @@
 			class="flex items-center gap-2.5 rounded-full py-1 pr-3 pl-1.5"
 			aria-label="Mystique home"
 		>
-			<img src="/brand/mystique-mark.svg" alt="" class="size-7" width="28" height="28" />
+			<img src={asset('brand/mystique-mark.svg')} alt="" class="size-7" width="28" height="28" />
 			<span class="text-[15px] font-semibold tracking-[-0.02em]">Mystique</span>
 		</a>
 		<ul class="hidden items-center md:flex">
@@ -453,7 +454,7 @@
 					class="overflow-hidden bezel-core !rounded-[1.75rem] [mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
 				>
 					<img
-						src="/app-home.jpg"
+						src={asset('app-home.jpg')}
 						width="2400"
 						height="1508"
 						alt="Creating a PostgreSQL connection in Mystique, with saved connections grouped by environment in the sidebar"
@@ -1248,7 +1249,7 @@ chmod +x Mystique_*.AppImage && ./Mystique_*.AppImage</code
 					class="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_60%_at_50%_100%,rgb(62_207_155/0.16),transparent_70%)]"
 				></div>
 				<img
-					src="/brand/mystique-dog.svg"
+					src={asset('brand/mystique-dog.svg')}
 					alt=""
 					width="88"
 					height="88"
@@ -1280,7 +1281,7 @@ chmod +x Mystique_*.AppImage && ./Mystique_*.AppImage</code
 		class="mx-auto flex max-w-[1240px] flex-col gap-8 md:flex-row md:items-center md:justify-between"
 	>
 		<div class="flex items-center gap-3">
-			<img src="/brand/mystique-mark.svg" alt="" class="size-8" width="32" height="32" />
+			<img src={asset('brand/mystique-mark.svg')} alt="" class="size-8" width="32" height="32" />
 			<div>
 				<p class="text-[15px] font-semibold tracking-[-0.02em]">Mystique</p>
 				<p class="font-mono text-[11.5px] text-fg-3">v{VERSION} · MIT licensed</p>

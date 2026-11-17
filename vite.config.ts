@@ -14,7 +14,9 @@ export default defineConfig({
 			},
 
 			// Pages are prerendered; unknown paths get the SPA shell (404.html), served by most static hosts.
-			adapter: adapter({ fallback: '404.html' })
+			adapter: adapter({ fallback: '404.html' }),
+			// GitHub Pages serves from /<repo>; the deploy workflow sets BASE_PATH. Empty locally.
+			paths: { base: (process.env.BASE_PATH ?? '') as '' | `/${string}` }
 		})
 	]
 });
